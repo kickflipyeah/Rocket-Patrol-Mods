@@ -5,7 +5,7 @@ let config = {
     height: 480,
     scene: [ Menu, Play ] //puts the diff scenes we have in the scene array
   }
-//reservekeyboard vars
+//reservekeyboard vars (no longer needed)
 let keyF, keyR, keyLEFT, keyRIGHT;
 let game = new Phaser.Game(config);
 

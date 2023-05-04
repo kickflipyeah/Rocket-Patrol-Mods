@@ -7,6 +7,7 @@ class Play extends Phaser.Scene {
         // load images/tile sprites
         this.load.image('rocket', './assets/rocket.png');
         this.load.image('spaceship', './assets/spaceship.png');
+        //new starfield made by me 
         this.load.image('starfield', './assets/starfield.png');
         // load spritesheet for explosion
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
@@ -106,7 +107,7 @@ class Play extends Phaser.Scene {
           this.scoreRight.setText = 'High Score: ' + this.highScore;
           console.log(this.highScore);
         }
-        //Fire UI displays before u shoot but not while shooting
+        //Fire UI displays before u shoot but not while
         if (this.p1Rocket.isFiring) {
           this.fireUI.alpha = 0;
         }

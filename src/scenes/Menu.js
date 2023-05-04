@@ -46,6 +46,7 @@ class Menu extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
           // easy mode
           game.settings = {
+            spaceship2Speed: 4,
             spaceshipSpeed: 3,
             gameTimer: 60000    
           }
@@ -55,6 +56,7 @@ class Menu extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
           // hard mode
           game.settings = {
+            spaceship2Speed: 5,
             spaceshipSpeed: 4,
             gameTimer: 45000    
           }

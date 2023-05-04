@@ -20,7 +20,8 @@ class Play extends Phaser.Scene {
         this.load.image('haze', './assets/haze.png');
         this.load.image('orange_star', './assets/orange_star.png');
         this.load.image('purple_star', './assets/purple_star.png');
-
+        this.load.image('blue_particle', './assets/blue_particle.png');
+        this.load.image('red_particle', './assets/red_particle.png');
         }
 
     create() {

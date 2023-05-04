@@ -45,6 +45,19 @@ class Play extends Phaser.Scene {
         });
         // initialize scores
         this.p1Score = 0;
+        // adding 'FIRE' to the UI
+        let fireConfig = {
+          fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#F3B141',
+            color: '#843605',
+            align: 'left',
+            padding: {
+            top: 5,
+            bottom: 5,
+            },
+            fixedWidth: 80
+        }
         // display score
         let scoreConfig = {
             fontFamily: 'Courier',
@@ -56,7 +69,7 @@ class Play extends Phaser.Scene {
             top: 5,
             bottom: 5,
             },
-            fixedWidth: 100
+            fixedWidth: 80
         }
         let highScoreConfig = {
           fontFamily: 'Courier',
@@ -70,6 +83,7 @@ class Play extends Phaser.Scene {
           },
           fixedWidth: 285
       }
+        this.fireUI = this.add.text(borderUISize*5 + borderPadding, borderUISize + borderPadding*2, 'FIRE', fireConfig);
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
         this.scoreRight = this.add.text(borderUISize*9 + borderPadding, borderUISize + borderPadding*2, 'High Score: ' + this.highScore, highScoreConfig); //add high score counter
 
@@ -92,6 +106,12 @@ class Play extends Phaser.Scene {
           this.scoreRight.setText = 'High Score: ' + this.highScore;
           console.log(this.highScore);
         }
+        //Fire UI displays before u shoot but not while shooting
+        if (this.p1Rocket.isFiring) {
+          this.fireUI.alpha = 0;
+        }
+        else
+          this.fireUI.alpha = 1;
         // check key input for restart / menu
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             this.scene.restart();

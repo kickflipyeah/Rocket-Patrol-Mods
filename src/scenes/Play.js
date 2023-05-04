@@ -13,6 +13,7 @@ class Play extends Phaser.Scene {
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
         //load background music by Lesiakower on pixabay.com
         this.load.audio('menu_music', './assets/menu_music.mp3');
+
         }
 
     create() {
@@ -157,6 +158,8 @@ class Play extends Phaser.Scene {
         }
       }
       shipExplode(ship) {
+        //add random sounds on explosion impact
+        let soundArray = ['sfx_explosion', 'sfx_explosion2', 'sfx_explosion3', 'sfx_explosion4', 'sfx_explosion5'];
         // temporarily hide ship
         ship.alpha = 0;
         // create explosion sprite at ship's position
@@ -170,8 +173,10 @@ class Play extends Phaser.Scene {
         // score add and repaint
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score;
-        //play explosion sound effect
-        this.sound.play('sfx_explosion');
+        //play random explosion sound effects
+        let randomsoundArray = Phaser.Utils.Array.GetRandom(soundArray);
+        this.sound.play(randomsoundArray);
+        //this.sound.play('sfx_explosion');
       }
   }
   

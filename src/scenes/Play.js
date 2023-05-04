@@ -13,12 +13,23 @@ class Play extends Phaser.Scene {
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
         //load background music by Lesiakower on pixabay.com
         this.load.audio('menu_music', './assets/menu_music.mp3');
+        //load images for a parallax background
+        this.load.image('sky', './assets/sky.png');
+        this.load.image('haze', './assets/haze.png');
+        this.load.image('orange_star', './assets/orange_star.png');
+        this.load.image('purple_star', './assets/purple_star.png');
 
         }
 
     create() {
+        //make the tile sprites parallax
+        this.add.image(0, 0, 'sky').setOrigin(0, 0,);
+
         //place tile sprite
-        this.starfield = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'starfield').setOrigin(0, 0);
+        this.starfield = this.add.tileSprite(0, 75, game.config.width, game.config.height, 'haze').setOrigin(0, 0);
+        this.starfield2 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'orange_star').setOrigin(0, 0);
+        this.starfield3 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'purple_star').setOrigin(0, 0);
+
         // purple UI background
         this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x5E5BA6).setOrigin(0, 0);
         // white borders
@@ -124,6 +135,9 @@ class Play extends Phaser.Scene {
         }
 
         this.starfield.tilePositionX -= 4;  // update tile sprite
+        this.starfield2.tilePositionX -= 5;  // update tile sprite
+        this.starfield3.tilePositionX -= 6;  // update tile sprite
+
 
         if(!this.gameOver) {
             this.p1Rocket.update();             // update p1

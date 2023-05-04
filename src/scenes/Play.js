@@ -51,7 +51,7 @@ class Play extends Phaser.Scene {
         // add three spaceships
         this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4, 'spaceship', 0, 30).setOrigin(0, 0);
         // add new spaceship
-        this.ship02 = new Spaceship2(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'spaceship2', 0, 20).setOrigin(0,0);
+        this.ship02 = new Spaceship2(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'spaceship2', 0, 40).setOrigin(0,0);
         this.ship03 = new Spaceship(this, game.config.width, borderUISize*6 + borderPadding*4, 'spaceship', 0, 10).setOrigin(0,0);
         //animation configuration
         this.anims.create({
@@ -61,6 +61,7 @@ class Play extends Phaser.Scene {
         });
         // initialize scores
         this.p1Score = 0;
+        // show last 10 seconds of time 
         // adding 'FIRE' to the UI
         let fireConfig = {
           fontFamily: 'Arial',
@@ -97,11 +98,11 @@ class Play extends Phaser.Scene {
           top: 5,
           bottom: 5,
           },
-          fixedWidth: 285
+          fixedWidth: 240
       }
-        this.fireUI = this.add.text(borderUISize*5 + borderPadding, borderUISize + borderPadding*2, 'FIRE', fireConfig);
+        this.fireUI = this.add.text(borderUISize*8 + borderPadding, borderUISize + borderPadding*2, 'FIRE', fireConfig);
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
-        this.scoreRight = this.add.text(borderUISize*9 + borderPadding, borderUISize + borderPadding*2, 'High Score: ' + this.highScore, highScoreConfig); //add high score counter
+        this.scoreRight = this.add.text(borderUISize*11 + borderPadding, borderUISize + borderPadding*2, 'High Score: ' + this.highScore, highScoreConfig); //add high score counter
 
         // GAME OVER flag
         this.gameOver = false;

@@ -10,14 +10,12 @@ class Rocket extends Phaser.GameObjects.Sprite {
       this.sfxRocket = scene.sound.add('sfx_rocket'); // add rocket sfx
     }
     update() {
-      //left and right movement with mouse, not keys
-      if(!this.isFiring) {
+      //left and right movement with mouse, not keys make it so u can move while firing
         if(game.input.mousePointer.x < this.x && this.x >= borderUISize + this.width) {
           this.x -= this.moveSpeed;
         } else if (game.input.mousePointer.x > this.x && this.x <= game.config.width - borderUISize - this.width) {
           this.x += this.moveSpeed;
         }
-      }
       //fire button with any mouse button
       if (game.input.mousePointer.isDown && !this.isFiring) {
         this.isFiring = true;

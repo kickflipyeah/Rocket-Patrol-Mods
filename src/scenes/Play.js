@@ -1,6 +1,7 @@
 class Play extends Phaser.Scene {
     constructor() {
       super("playScene");
+      this.highScore = 0; //high score starting at 0 
     }
     preload() {
         // load images/tile sprites
@@ -9,9 +10,13 @@ class Play extends Phaser.Scene {
         this.load.image('starfield', './assets/starfield.png');
         // load spritesheet for explosion
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+        //load background music by Lesiakower on pixabay.com
+        this.load.audio('menu_music', './assets/menu_music.mp3');
         }
 
     create() {
+        //place tile sprite
+        this.starfield = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'starfield').setOrigin(0, 0);
         // green UI background
         this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
         // white borders
@@ -19,10 +24,10 @@ class Play extends Phaser.Scene {
         this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
         this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
         this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
-        //place tile sprite
-        this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
         // add rocket (p1)
         this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
+        // play game background music
+        this.sound.play('menu_music', {volume: 0.3});
         //define the keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
@@ -38,7 +43,7 @@ class Play extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 9, first: 0}),
             frameRate: 30
         });
-        // initialize score
+        // initialize scores
         this.p1Score = 0;
         // display score
         let scoreConfig = {
@@ -53,12 +58,27 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 100
         }
+        let highScoreConfig = {
+          fontFamily: 'Courier',
+          fontSize: '28px',
+          backgroundColor: '#F3B141',
+          color: '#843605',
+          align: 'left',
+          padding: {
+          top: 5,
+          bottom: 5,
+          },
+          fixedWidth: 285
+      }
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
+        this.scoreRight = this.add.text(borderUISize*9 + borderPadding, borderUISize + borderPadding*2, 'High Score: ' + this.highScore, highScoreConfig); //add high score counter
+
         // GAME OVER flag
         this.gameOver = false;
         // 60-second play clock
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
+            this.sound.stopAll(); //stop sound when time runs out
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
@@ -66,6 +86,12 @@ class Play extends Phaser.Scene {
     }
 
     update() {
+        //update highscore text
+        if (this.gameOver && this.p1Score > this.highScore) {
+          this.highScore = this.p1Score;
+          this.scoreRight.setText = 'High Score: ' + this.highScore;
+          console.log(this.highScore);
+        }
         // check key input for restart / menu
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             this.scene.restart();
@@ -123,7 +149,7 @@ class Play extends Phaser.Scene {
         // score add and repaint
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score;
-
+        //play explosion sound effect
         this.sound.play('sfx_explosion');
       }
   }

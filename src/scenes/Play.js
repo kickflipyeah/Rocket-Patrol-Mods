@@ -137,9 +137,9 @@ class Play extends Phaser.Scene {
             this.scene.start("menuScene");
         }
 
-        this.starfield.tilePositionX -= 4;  // update tile sprite
-        this.starfield2.tilePositionX -= 5;  // update tile sprite
-        this.starfield3.tilePositionX -= 6;  // update tile sprite
+        this.starfield.tilePositionX -= 3;  // update tile sprite
+        this.starfield2.tilePositionX -= 4;  // update tile sprite
+        this.starfield3.tilePositionX -= 5;  // update tile sprite
 
 
         if(!this.gameOver) {

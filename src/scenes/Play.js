@@ -18,8 +18,8 @@ class Play extends Phaser.Scene {
     create() {
         //place tile sprite
         this.starfield = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'starfield').setOrigin(0, 0);
-        // green UI background
-        this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
+        // purple UI background
+        this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x5E5BA6).setOrigin(0, 0);
         // white borders
         this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
         this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
@@ -48,10 +48,10 @@ class Play extends Phaser.Scene {
         this.p1Score = 0;
         // adding 'FIRE' to the UI
         let fireConfig = {
-          fontFamily: 'Courier',
+          fontFamily: 'Arial',
             fontSize: '28px',
-            backgroundColor: '#F3B141',
-            color: '#843605',
+            backgroundColor: '#0D0C2C',
+            color: '#FFFFFF',
             align: 'left',
             padding: {
             top: 5,
@@ -61,10 +61,10 @@ class Play extends Phaser.Scene {
         }
         // display score
         let scoreConfig = {
-            fontFamily: 'Courier',
+            fontFamily: 'Arial',
             fontSize: '28px',
-            backgroundColor: '#F3B141',
-            color: '#843605',
+            backgroundColor: '#0D0C2C',
+            color: '#FFFFFF',
             align: 'right',
             padding: {
             top: 5,
@@ -73,10 +73,10 @@ class Play extends Phaser.Scene {
             fixedWidth: 80
         }
         let highScoreConfig = {
-          fontFamily: 'Courier',
+          fontFamily: 'Arial',
           fontSize: '28px',
-          backgroundColor: '#F3B141',
-          color: '#843605',
+          backgroundColor: '#0D0C2C',
+          color: '#FFFFFF',
           align: 'left',
           padding: {
           top: 5,
